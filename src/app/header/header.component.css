@@ -1,0 +1,26 @@
+.fixed-top {
+    background-color: #ffffff;
+}
+
+.navbar{
+    background: #193061 !important;
+}
+
+.nav-link{
+    color: #ffffff !important;
+}
+
+.nav-link:hover{
+    color: #ffffff !important;
+}
+
+.navbar-brand{
+    color: #ffffff !important;
+}
+
+.navbar-nav {
+    text-align: center;
+}
+.active{
+    color: #ffffff !important;
+}
