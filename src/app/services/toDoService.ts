@@ -17,4 +17,8 @@ export class ToDoService {
         return this.http.post<ToDoInputModel>(`${this.urlApi}/CreateToDo`, toDo, { headers: headers })
             .pipe(map((response: any) => response), (error: any) => error);
     }
+
+    public getAll(): Observable<ToDoInputModel[]> {
+        return this.http.get<ToDoInputModel[]>(`${this.urlApi}/GetAllToDo`);
+    }
 }

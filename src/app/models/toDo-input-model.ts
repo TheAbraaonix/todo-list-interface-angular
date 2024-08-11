@@ -1,7 +1,7 @@
 export class ToDoInputModel {
-    public Name: string = "";
-    public Description: string = "";
-    public Priority: number = 0;
-    public IsCompleted: boolean = false;
-    public IsDeleted: boolean = false;
+    public name: string = "";
+    public description: string = "";
+    public priority: number = 0;
+    public isCompleted: boolean = false;
+    public isDeleted: boolean = false;
 }

@@ -25,9 +25,9 @@ export class CreateToDoComponent {
 
   public createToDo(): void {
     let toDo: ToDoInputModel = new ToDoInputModel();
-    toDo.Name = this.formulario.get("title")!.value;
-    toDo.Description = this.formulario.get("description")!.value;
-    toDo.Priority = parseInt(this.formulario.get("priority")!.value);
+    toDo.name = this.formulario.get("title")!.value;
+    toDo.description = this.formulario.get("description")!.value;
+    toDo.priority = parseInt(this.formulario.get("priority")!.value);
     
     this.toDoService.create(toDo)
       .subscribe({
