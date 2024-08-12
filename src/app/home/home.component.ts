@@ -23,4 +23,24 @@ export class HomeComponent implements OnInit {
       this.toDos = response;
     });
   }
+
+  public selectedFilter(filter: string): void {
+    if (filter === "Completed") {
+      this.toDoService.getAll().subscribe((response: any) => {
+        this.toDos = response.filter((todo: ToDoViewModel) => todo.isCompleted === true);
+      })
+    }
+
+    if (filter === "In progress") {
+      this.toDoService.getAll().subscribe((response: any) => {
+        this.toDos = response.filter((todo: ToDoViewModel) => todo.isCompleted === false);
+      })
+    }
+    
+    if (filter === "All") {
+      this.toDoService.getAll().subscribe((response: any) => {
+        this.toDos = response;
+      });
+    }
+  }
 }
