@@ -42,7 +42,6 @@ export class CreateToDoComponent {
 
   public success(): void {
     this.formulario.reset();
-    alert("Your to do was created successfully!");
     this.router.navigate(["/"]);
   }
 }
