@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToDoService } from '../services/toDoService';
 import { ToDoViewModel } from '../models/toDo-view-model';
+import * as bootstrap from 'bootstrap'; // Import the 'bootstrap' module
 
 @Component({
   selector: 'app-to-do-details',
@@ -30,8 +31,16 @@ export class ToDoDetailsComponent implements OnInit {
 
   public delete(): void {
     this.toDoService.delete(this.toDo.id).subscribe((response: any) => {
-      alert("To-Do deleted successfully!");
-      this.router.navigate(["/"]);
+      const deleteModal = document.getElementById('deleteModal');
+      
+      if (deleteModal) {
+        const modal = bootstrap.Modal.getInstance(deleteModal);
+        modal?.hide();
+      }
+      
+      document.body.classList.remove('modal-open');
+      document.querySelectorAll('.modal-backdrop').forEach((backdrop) => backdrop.remove());
+      this.router.navigate(['/']);
     });
   }
 }
