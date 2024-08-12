@@ -30,4 +30,11 @@ export class ToDoService {
     public delete(id: string): Observable<any> {
         return this.http.delete(`${this.urlApi}/DeleteToDo/${id}`);
     }
+
+    public update(id: string, toDo: ToDoInputModel): Observable<ToDoViewModel> {
+        let headers: HttpHeaders = new HttpHeaders({ 'Content-type': 'application/json' });
+        
+        return this.http.put<ToDoViewModel>(`${this.urlApi}/UpdateToDo/${id}`, toDo, { headers: headers })
+            .pipe(map((response: any) => response), (error: any) => error);
+    }
 }
