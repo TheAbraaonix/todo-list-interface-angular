@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ToDoInputModel } from "../models/toDo-input-model";
 import { map, Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { ToDoViewModel } from "../models/toDo-view-model";
 
 @Injectable({
     providedIn: "root"
@@ -18,7 +19,11 @@ export class ToDoService {
             .pipe(map((response: any) => response), (error: any) => error);
     }
 
-    public getAll(): Observable<ToDoInputModel[]> {
-        return this.http.get<ToDoInputModel[]>(`${this.urlApi}/GetAllToDo`);
+    public getAll(): Observable<ToDoViewModel[]> {
+        return this.http.get<ToDoViewModel[]>(`${this.urlApi}/GetAllToDo`);
+    }
+
+    public getById(id: string): Observable<ToDoViewModel> {
+        return this.http.get<ToDoViewModel>(`${this.urlApi}/GetToDoById/${id}`);
     }
 }
