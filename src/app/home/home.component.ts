@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToDoService } from '../services/toDoService';
-import { ToDoInputModel } from '../models/toDo-input-model';
 import { NgFor, NgIf } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ToDoViewModel } from '../models/toDo-view-model';
+import * as bootstrap from 'bootstrap'; // Import the 'bootstrap' module
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,10 @@ import { ToDoViewModel } from '../models/toDo-view-model';
 export class HomeComponent implements OnInit {
   public toDos: ToDoViewModel[] = [];
   
-  constructor(private toDoService: ToDoService) { }
+  constructor(
+    private toDoService: ToDoService,
+    private router: Router
+  ) { }
   
   ngOnInit(): void {
     this.toDoService.getAll().subscribe((response: any) => {
@@ -42,5 +45,32 @@ export class HomeComponent implements OnInit {
         this.toDos = response;
       });
     }
+  }
+
+  public updateToDoStatus(status: string, toDo: ToDoViewModel): void {
+    if (status === "toCompleted") {
+      toDo.isCompleted = true;
+      this.toDoService.update(toDo.id, toDo).subscribe((response: any) => {});
+    }
+
+    if (status === "toInProgress") {
+      toDo.isCompleted = false;
+      this.toDoService.update(toDo.id, toDo).subscribe((response: any) => {});
+    }
+  }
+
+  public delete(id: string): void {
+    this.toDoService.delete(id).subscribe((response: any) => {
+      const deleteModal = document.getElementById('deleteModal');
+      
+      if (deleteModal) {
+        const modal = bootstrap.Modal.getOrCreateInstance(deleteModal);
+        modal?.hide();
+      }
+      
+      document.body.classList.remove('modal-open');
+      document.querySelectorAll('.modal-backdrop').forEach((backdrop) => backdrop.remove());
+      window.location.reload();
+    });
   }
 }
