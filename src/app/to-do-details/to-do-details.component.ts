@@ -68,20 +68,12 @@ export class ToDoDetailsComponent implements OnInit {
     this.toDoService.update(this.toDo.id, updatedToDo).subscribe({
       next: (response: any) => {
         this.toDo = response;
-        console.log(this.toDo);
 
         const updateModal = document.getElementById('updateModal');
 
         if (updateModal) {
           const modal = bootstrap.Modal.getInstance(updateModal);
           modal?.hide();
-        }
-
-        const confirmationUpdatedModel = document.getElementById('confirmationUpdatedModel');
-        
-        if (confirmationUpdatedModel) {
-          const modal = bootstrap.Modal.getInstance(confirmationUpdatedModel);
-          modal?.show();
         }
       },
       error: (error: any) => {
