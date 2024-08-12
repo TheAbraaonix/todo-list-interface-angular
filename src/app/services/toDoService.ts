@@ -26,4 +26,8 @@ export class ToDoService {
     public getById(id: string): Observable<ToDoViewModel> {
         return this.http.get<ToDoViewModel>(`${this.urlApi}/GetToDoById/${id}`);
     }
+
+    public delete(id: string): Observable<any> {
+        return this.http.delete(`${this.urlApi}/DeleteToDo/${id}`);
+    }
 }
